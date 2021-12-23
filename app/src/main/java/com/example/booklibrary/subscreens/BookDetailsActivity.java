@@ -3,6 +3,7 @@ package com.example.booklibrary.subscreens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,13 +22,14 @@ import com.example.booklibrary.models.CategoryModel;
 
 public class BookDetailsActivity extends AppCompatActivity {
     public static final String BOOK_ID_KEY = "BOOK_ID";
-
+    Menu menu;
     BookModel bookModel;
     int bookId;
     DatabaseHelper databaseHelper;
     Button editButton;
     CategoryModel categoryModel;
     ImageView bookImageView;
+    MenuItem favoriteMenuItem;
     TextView bookNameTextView, bookAuthorTextView, bookReleaseDateTextView, bookPageNumTextView,bookCatTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,16 @@ public class BookDetailsActivity extends AppCompatActivity {
         editButton = findViewById(R.id.edit_button);
         bookImageView = findViewById(R.id.book_det_img);
 
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             bookId = extras.getInt(CategoryActivity.BOOK_ID_KEY);
         }
+
         databaseHelper = new DatabaseHelper(this);
         setBookDetails();
+
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +67,12 @@ public class BookDetailsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        favoriteMenuItem = menu.findItem(R.id.favorite);
+        if (databaseHelper.isFavorite(bookId)) {
+            favoriteMenuItem.setIcon(R.drawable.is_favorite);
+        } else {
+            favoriteMenuItem.setIcon(R.drawable.is_not_favorite);
+        }
         return true;
     }
     @Override
@@ -69,6 +81,14 @@ public class BookDetailsActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.delete) {
             deleteBook();
             return true;
+        }else if(item.getItemId() == R.id.favorite){
+          if(databaseHelper.isFavorite(bookId)) {
+              deleteBookFromFavorite();
+              favoriteMenuItem.setIcon(R.drawable.is_not_favorite);
+          }else{
+              addBookToFavorite();
+              favoriteMenuItem.setIcon(R.drawable.is_favorite);
+          }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -76,7 +96,13 @@ public class BookDetailsActivity extends AppCompatActivity {
     databaseHelper.deleteBookById(bookId);
     finish();
     }
+    public void addBookToFavorite(){
+        databaseHelper.addBookToFavoriteById(bookId);
 
+    }
+    public void  deleteBookFromFavorite(){
+        databaseHelper.deleteBookFromFavorite(bookId);
+    }
     @Override
     protected void onResume() {
         super.onResume();

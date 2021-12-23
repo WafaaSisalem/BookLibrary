@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,12 +24,10 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.example.booklibrary.R;
 import com.example.booklibrary.database.DatabaseHelper;
 import com.example.booklibrary.models.BookModel;
 import com.example.booklibrary.models.CategoryModel;
-
 import java.util.List;
 
 public class CreateBookActivity extends AppCompatActivity {
@@ -73,12 +72,10 @@ public class CreateBookActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
-                            // There are no request codes
                             Intent data = result.getData();
                             if(data!=null)
                             imageUri = ensureUriPermission(CreateBookActivity.this, data);
                             circleImageView.setImageURI(imageUri);
-                            Toast.makeText(CreateBookActivity.this, imageUri.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -133,7 +130,7 @@ public class CreateBookActivity extends AppCompatActivity {
     public void openGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT );
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         someActivityResultLauncher.launch(intent);
     }
 

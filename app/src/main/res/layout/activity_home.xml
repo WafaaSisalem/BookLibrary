@@ -20,9 +20,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/library_card_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             app:cardCornerRadius="8dp"
@@ -52,9 +49,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/favorite_card_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             app:cardCornerRadius="8dp"
@@ -82,9 +76,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/create_book_card_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             app:cardCornerRadius="8dp"
@@ -112,9 +103,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/create_category_card_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             app:cardCornerRadius="8dp"

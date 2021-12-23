@@ -26,11 +26,9 @@ public class CategoryActivity extends AppCompatActivity {
     public static final String BOOK_ID_KEY = "BOOK_ID";
     String categoryName;
     int categoryId;
-
     RecyclerView categoryBookRecycler;
-    List <BookModel> bookModels;
     DatabaseHelper databaseHelper;
-    RecyclerBookAdapter recyclerBookAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +54,12 @@ public class CategoryActivity extends AppCompatActivity {
         initBookModel();
     }
     public void initBookModel(){
-        bookModels = databaseHelper.getBooksByCategoryId(categoryId);
+        List <BookModel> bookModels = databaseHelper.getBooksByCategoryId(categoryId);
         RecyclerBookAdapter recyclerBookAdapter = new RecyclerBookAdapter(bookModels);
         categoryBookRecycler.setAdapter(recyclerBookAdapter);
         recyclerBookAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, int bookId) {
-                TextView bookNameTextView = (TextView) view.findViewById(R.id.book_name);
-                String bookName = bookNameTextView.getText().toString();
                 Intent intent = new Intent(CategoryActivity.this, BookDetailsActivity.class);
                 intent.putExtra(BOOK_ID_KEY,bookId);
                 startActivity(intent);

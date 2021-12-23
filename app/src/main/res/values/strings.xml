@@ -13,4 +13,5 @@
     <string name="pages_number">Pages Number</string>
     <string name="edit">Edit</string>
     <string name="update">Update</string>
+    <string name="delete">delete</string>
 </resources>
