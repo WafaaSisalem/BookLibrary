@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Book Library</string>
+    <string name="library">Library</string>
+    <string name="favorites">Favorites</string>
+    <string name="create_book">Create Book</string>
+    <string name="create_category">Create Category</string>
+    <string name="create">Create</string>
+    <string name="category_name">Category Name</string>
+    <string name="book_name">Book Name</string>
+    <string name="category">Category</string>
+    <string name="author_name">Author Name</string>
+    <string name="release_year">Release Year</string>
+    <string name="pages_number">Pages Number</string>
+    <string name="edit">Edit</string>
+    <string name="update">Update</string>
+</resources>
