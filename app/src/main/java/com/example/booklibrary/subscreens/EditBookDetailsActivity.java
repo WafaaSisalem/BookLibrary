@@ -123,12 +123,13 @@ public class EditBookDetailsActivity extends AppCompatActivity {
                     Toast.makeText(EditBookDetailsActivity.this, "Invalid Release Date!", Toast.LENGTH_SHORT).show();
                 } else if (pageNum.isEmpty()) {
                     Toast.makeText(EditBookDetailsActivity.this, "Invalid Page Number!", Toast.LENGTH_SHORT).show();
+                }else {
+                    DatabaseHelper databaseHelper = new DatabaseHelper(EditBookDetailsActivity.this);
+                    CategoryModel categoryModel = databaseHelper.getCategoryByName(categorySpinner.getSelectedItem().toString());
+                    BookModel newBookModel = new BookModel(-1, bookName, authorName, releaseYear, pageNum, categoryModel.getId(), imageUri.toString());
+                    databaseHelper.updateBookById(bookId, newBookModel);
+                    finish();
                 }
-                DatabaseHelper databaseHelper = new DatabaseHelper(EditBookDetailsActivity.this);
-                CategoryModel categoryModel = databaseHelper.getCategoryByName(categorySpinner.getSelectedItem().toString());
-                BookModel newBookModel = new BookModel(-1,bookName,authorName,releaseYear,pageNum,categoryModel.getId(),imageUri.toString());
-                databaseHelper.updateBookById(bookId,newBookModel);
-                finish();
             }
         });
     }
